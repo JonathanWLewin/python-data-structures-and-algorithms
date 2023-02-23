@@ -1,0 +1,19 @@
+html {
+    font-family: sans-serif;
+    background: #252525;
+    color: rgb(145, 145, 145);
+}
+body {
+    margin: 0;
+}
+
+nav {
+    background-color: #4b4b4b;
+    display: flex;
+    justify-content: center;
+}
+
+a {
+    color: rgb(145, 145, 145);
+    text-decoration: none;
+}
