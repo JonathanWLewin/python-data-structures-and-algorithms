@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Index{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <nav>
+        <u1>
+            <li><a href="{{ url_for('data-structures.list')}}">Data structures</a>
+        </u1>
+    </nav>
+{% endblock %}

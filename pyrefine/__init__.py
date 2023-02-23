@@ -1,6 +1,8 @@
 import os
 from flask import Flask, render_template
 
+from pyrefine import dataStructures
+
 
 def create_app(test_config=None):
     # create and configure the app
@@ -22,9 +24,10 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    #Base route
+    #Index route
     @app.route('/')
     def index():
-        return render_template('base.html')
-
+        return render_template('index.html')
+    
+    app.register_blueprint(dataStructures.bp)
     return app
