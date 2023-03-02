@@ -1,5 +1,5 @@
-import inspect
 from flask import Blueprint, render_template
+from pyrefine.StackImplementer import StackImplementer
 
 bp = Blueprint("data-structures", __name__, url_prefix="/data-structures")
 
@@ -8,4 +8,6 @@ def code_test():
 
 @bp.route("list")
 def list():
-    return render_template("dataStructures/list.html", code=inspect.getsource(code_test))
+    stack = StackImplementer()
+    title, description, code, examples = stack.get_template_values()
+    return render_template("dataStructures/list.html", title=title, description=description, code=code, examples=examples)

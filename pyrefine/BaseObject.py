@@ -1,3 +1,4 @@
+from pyrefine import Example
 class BaseObject():
     _title = ''
     _description = ''
@@ -6,8 +7,8 @@ class BaseObject():
     def __init__(self) -> None:
         pass
 
-    def generate_examples(self):
+    def generate_examples(self) -> Example:
         pass
     
     def get_template_values(self):
-        return (self._title, self._description, self._code, self.generate_examples())
+        return self._title, self._description, self._code, self.generate_examples()

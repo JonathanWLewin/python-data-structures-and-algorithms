@@ -22,3 +22,7 @@ a {
 .content {
     margin: 10px;
 }
+
+span {
+    white-space: pre-wrap;
+}

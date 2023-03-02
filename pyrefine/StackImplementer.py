@@ -1,10 +1,11 @@
 import inspect
-from BaseObject import BaseObject
-from Example import Example
-from Stack import Stack
+from pyrefine.BaseObject import BaseObject
+from pyrefine.Example import Example 
+from pyrefine.Stack import Stack
+
 class StackImplementer(BaseObject):
     _description = "A stack implements FIFO"
-    _code = inspect(Stack)
+    _code = inspect.getsource(Stack)
     _title = "Stack"
     def __init__(self) -> None:
         super().__init__()

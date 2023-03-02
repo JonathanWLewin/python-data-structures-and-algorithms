@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template
 
-from pyrefine import dataStructures
+from pyrefine import DataStructures
 
 
 def create_app(test_config=None):
@@ -29,5 +29,5 @@ def create_app(test_config=None):
     def index():
         return render_template('index.html')
     
-    app.register_blueprint(dataStructures.bp)
+    app.register_blueprint(DataStructures.bp)
     return app
