@@ -1,9 +1,4 @@
-import inspect
-from BaseObject import BaseObject
-class Stack(BaseObject):
-    _description = "A stack implements FIFO"
-    _code = inspect(BaseObject)
-    _title = "Stack"
+class Stack():
     def __init__(self) -> None:
         super().__init__()
         self.stack = []
@@ -25,8 +20,3 @@ class Stack(BaseObject):
 
     def pop(self):
         return self.stack.pop()
-    
-    def generate_examples(self):
-        examples = [{
-            
-        }]

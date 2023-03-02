@@ -1,7 +1,7 @@
-class BaseObject(object):
-    _title = 'BASE'
-    _description = 'BASE'
-    _code = 'CODE'
+class BaseObject():
+    _title = ''
+    _description = ''
+    _code = ''
 
     def __init__(self) -> None:
         pass
