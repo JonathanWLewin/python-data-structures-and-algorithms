@@ -2,6 +2,7 @@ import inspect
 from pyrefine.BaseObject import BaseObject
 from pyrefine.Example import Example 
 from pyrefine.Stack import Stack
+from pyrefine.CodeFormatter import format_code
 
 class StackImplementer(BaseObject):
     _description = "A stack implements FIFO"
@@ -11,17 +12,17 @@ class StackImplementer(BaseObject):
         super().__init__()
     
     def generate_examples(self):
-        examples = [
-            Example('Initialization', 'Initialization of empty stack', 2, 'stack = Stack()', reversed(self.example_1())),
-            Example('Push', 'Pushing a value to the top of the stack', 18, 'stack.push(15)', reversed(self.example_2()))
-        ]
+        code_string = """
+        class Stack:
+            def __init__():
+                pass
+            
+        stack = Stack()"""
+        examples = []
+        stack = Stack()
+        examples.append(Example('Initialization', 'Initialization of empty stack', 2, format_code(code_string), reversed(stack.stack)))
+        stack.push(1)
+        examples.append(Example('Push', 'Initialization of empty stack', 18, 'stack.push(1)', reversed(stack.stack)))
+        stack.push(5)
+        examples.append(Example('Push', 'Initialization of empty stack', 18, 'stack.push(5)', reversed(stack.stack)))
         return examples
-    
-    def example_1(self):
-        stack = Stack()
-        return stack.stack
-    
-    def example_2(self):
-        stack = Stack()
-        stack.push(2)
-        return stack.stack

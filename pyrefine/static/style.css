@@ -41,3 +41,16 @@ span {
     font-size: 20px;
     font-weight: bold;
   }
+
+  .code {
+    background-color: #000000;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 1.4;
+    overflow: auto;
+    padding: 1em;
+    tab-size: 4;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  

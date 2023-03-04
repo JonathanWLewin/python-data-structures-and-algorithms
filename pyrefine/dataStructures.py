@@ -10,4 +10,5 @@ def code_test():
 def list():
     stack = StackImplementer()
     title, description, code, examples = stack.get_template_values()
+    print(examples[0].input.css)
     return render_template("dataStructures/list.html", title=title, description=description, code=code, examples=examples)

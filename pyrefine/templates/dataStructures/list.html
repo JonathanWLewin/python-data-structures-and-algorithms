@@ -11,15 +11,24 @@
     <span>{{code}}</span>
     <br>
     {% for example in examples %}
-        <h3>{{example.title}}</h3>
-        <span>{{example.description}}</span>
-        <br><br>
-        <span>code line: {{example.code_number}}</span>
-        <br><br>
-        <span>{{example.input}}</span>
-        <br><br>
-        {% with example_output=example.output %}
-            {% include 'dataStructures/stack.html' %}
-        {% endwith %}
+    <head>
+        <style>{{example.input.css | safe}}</style>
+    </head>
+    <body>
+        <div>
+            <h3>{{example.title}}</h3>
+            <span>{{example.description}}</span>
+            <br><br>
+            <span>code line: {{example.code_number}}</span>
+            <br><br>
+            <div class="code">
+                <span>{{example.input.code | safe}}</span>
+            </div>
+            <br><br>
+            {% with example_output=example.output %}
+                {% include 'dataStructures/stack.html' %}
+            {% endwith %}
+        </div>
+    </body>
     {% endfor %}
 {% endblock %}
