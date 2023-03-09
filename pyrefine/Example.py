@@ -1,7 +1,11 @@
 class Example:
-    def __init__(self, title: str, description: str, code_line: int, input = '', output = '') -> None:
+    title: str
+    description: str
+    input: str
+    output: str
+    def __init__(self, title: str, description: str, input = '', output = '', state = None) -> None:
         self.title = title
         self.description = description
-        self.code_number = code_line
         self.input = input
         self.output = output
+        self.state = state

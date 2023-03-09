@@ -1,5 +1,7 @@
-{% for record in example_output %}
-<div class="box">
-    <span class="box-value">{{record}}</span>
-</div>
-{% endfor %}
+{% if example_state != None %}
+    {% for record in example_state %}
+    <div class="box">
+        <span class="box-value">{{record}}</span>
+    </div>
+    {% endfor %}
+{% endif %}

@@ -8,27 +8,34 @@
     <h2>{{title}}</h2>
     <span>{{description}}</span>
     <br><br>
-    <span>{{code}}</span>
-    <br>
+    <div class="code-box">
+        <span>{{code | safe}}</span>
+    </div>
+    <br><br>
+    <h2>Examples</h2>
     {% for example in examples %}
-    <head>
-        <style>{{example.input.css | safe}}</style>
-    </head>
     <body>
         <div>
             <h3>{{example.title}}</h3>
-            <span>{{example.description}}</span>
+            <span class="pre-wrap">{{example.description}}</span>
             <br><br>
-            <span>code line: {{example.code_number}}</span>
-            <br><br>
-            <div class="code">
-                <span>{{example.input.code | safe}}</span>
+            <div class="code-box">
+                <span>{{example.input | safe}}</span>
             </div>
             <br><br>
-            {% with example_output=example.output %}
+            {% if example.output != '' %}
+                <div class="output-box">
+                    <h3>Output</h3>
+                    <span class="pre-wrap">{{example.output}}</span>
+                </div>
+                <br><br>
+            {% endif %}
+            {% with example_state=example.state %}
                 {% include 'dataStructures/stack.html' %}
             {% endwith %}
         </div>
     </body>
     {% endfor %}
+    <input type="submit" value="Next">
+    <input type="submit" value="Previous">
 {% endblock %}

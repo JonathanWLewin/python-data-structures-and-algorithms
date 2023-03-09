@@ -1,3 +1,5 @@
+@import url('code_styles.css');
+
 html {
     font-family: sans-serif;
     background: #252525;
@@ -23,7 +25,7 @@ a {
     margin: 10px;
 }
 
-span {
+.pre-wrap {
     white-space: pre-wrap;
 }
 
@@ -35,22 +37,32 @@ span {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  .box-value {
+}
+
+.box-value {
     font-size: 20px;
     font-weight: bold;
-  }
+}
 
-  .code {
+.code-box {
     background-color: #000000;
     border-radius: 3px;
     font-size: 14px;
     line-height: 1.4;
     overflow: auto;
-    padding: 1em;
+    padding: 0.25em;
     tab-size: 4;
-    white-space: pre-wrap;
     word-wrap: break-word;
-  }
-  
+}
+
+.output-box {
+    background-color: grey;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 1.4;
+    overflow: auto;
+    padding: 0.25em;
+    tab-size: 4;
+    word-wrap: break-word;
+    color: #000;
+}
