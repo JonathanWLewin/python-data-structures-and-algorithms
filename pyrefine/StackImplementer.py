@@ -8,7 +8,7 @@ from pyrefine.Override import Override
 
 class StackImplementer(BaseObject):
     _description = """
-    A stack obejct implements First In First Out (FIFO).
+    A stack object implements First In First Out (FIFO).
     """
     _code = inspect.getsource(Stack)
     _title = "Stack"

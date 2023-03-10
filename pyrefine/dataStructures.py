@@ -4,11 +4,10 @@ from pyrefine.CodeFormatter import format_code
 
 bp = Blueprint("data-structures", __name__, url_prefix="/data-structures")
 
-def code_test():
-    print("Hello")
-
-@bp.route("list")
-def list():
+@bp.route("stack/example/<int:id>")
+def stack(id):
     stack = StackImplementer()
     title, description, code, examples = stack.get_template_values()
-    return render_template("dataStructures/list.html", title=title, description=description, code=code, examples=examples)
+    example = examples[id - 1]
+    length = len(examples)
+    return render_template("dataStructures/stack.html", title=title, description=description, code=code, example=example, length=length, id=id)
