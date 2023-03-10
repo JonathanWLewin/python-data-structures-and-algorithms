@@ -1,0 +1,3 @@
+graft pyrefine/static
+graft pyrefine/templates
+global-exclude *.pyc
