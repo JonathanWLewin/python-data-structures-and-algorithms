@@ -36,15 +36,25 @@
                 {% endif %}
             </div>
         </div>
-        {% if id > 1 %}
-            <input type="submit" value="Previous">
-        {% else %}
-            <input type="submit" value="Previous" class="disabled">
-        {% endif %} 
-        {% if id < length %}
-            <input type="submit" value="Next">
-        {% else %}
-            <input type="submit" value="Next" class="disabled">
-        {% endif %} 
+        <div class="nav-buttons">
+            {% if id > 1 %}
+                <form action="{{url_for('data-structures.stack', id=id -1)}}" method="GET">
+                    <input type="submit" value="Previous">
+                </form>
+            {% else %}
+            <form action="{{url_for('data-structures.stack', id=id -1)}}" method="GET">
+                <input type="submit" value="Previous" class="disabled">
+            </form>
+            {% endif %} 
+            {% if id < length %}
+                <form action="{{url_for('data-structures.stack', id=id + 1)}}" method="GET">
+                    <input type="submit" value="Next">
+                </form>
+            {% else %}
+            <form action="{{url_for('data-structures.stack', id=id + 1)}}" method="GET">
+                <input type="submit" value="Next" class="disabled">
+            </form>
+            {% endif %} 
+        </div>
     </body>
 {% endblock %}

@@ -89,3 +89,15 @@ a {
     align-items: center;
     flex-direction: column;
 }
+
+.nav-button {
+    border: 1px solid #000;
+    border-radius: 3px;
+    background-color: white;
+    color: #000;
+}
+
+.nav-buttons {
+    display: flex;
+    flex-direction: row;
+}
