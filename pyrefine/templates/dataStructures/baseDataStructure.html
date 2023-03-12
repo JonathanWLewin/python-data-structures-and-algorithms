@@ -13,7 +13,7 @@
     </div>
     <br><br>
     <h2>Examples</h2>
-    <body>
+    <body onload="scrollToElement()">
         <div class="example-container">
             <div style="flex: 1">
                 <h3>{{example.title}}</h3>
@@ -36,7 +36,7 @@
                 {% endif %}
             </div>
         </div>
-        <div class="nav-buttons">
+        <div id="nav-buttons" class="nav-buttons">
             {% if id > 1 %}
                 <form action="{{url_for('data-structures.stack', id=id -1)}}" method="GET">
                     <input type="submit" value="Previous">
@@ -57,4 +57,12 @@
             {% endif %} 
         </div>
     </body>
+
+    <script>
+        function scrollToElement() {
+            var element = document.getElementById("nav-buttons");
+            element.scrollIntoView();
+        }
+    </script>
+    
 {% endblock %}
