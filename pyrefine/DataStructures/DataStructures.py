@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, abort
-from pyrefine.StackImplementer import StackImplementer
+from pyrefine.DataStructures.Stack.StackImplementer import StackImplementer
 
 bp = Blueprint("data-structures", __name__, url_prefix="/data-structures")
 

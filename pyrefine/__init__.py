@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template
 
-from pyrefine import DataStructures
+from pyrefine.DataStructures import DataStructures
 
 
 def create_app(test_config=None):

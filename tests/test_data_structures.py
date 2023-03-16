@@ -1,4 +1,4 @@
-from pyrefine.StackImplementer import StackImplementer
+from pyrefine.DataStructures.Stack.StackImplementer import StackImplementer
 
 def test_nav_buttons(client):
     stack = StackImplementer()
@@ -17,7 +17,6 @@ def test_stack_examples(client):
         example = examples[i]
         assert bytes(f'<span class="pre-wrap">{example.description}</span>', encoding='utf8') in response.data
         assert bytes(f'<h3>{example.title}</h3>', encoding='utf-8') in response.data
-        assert bytes(f'<span>{example.input | safe}</span>')
 
         output = example.output
         state = example.state
