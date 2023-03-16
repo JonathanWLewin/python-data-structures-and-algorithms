@@ -5,8 +5,6 @@
 {% endblock %}
 
 {% block content %}
-    <span>{{description}}</span>
-    <br><br>
     <div class="code-box">
         <span>{{code | safe}}</span>
     </div>
@@ -16,6 +14,7 @@
         <div class="example-container">
             <div style="flex: 1">
                 <h3>{{example.title}}</h3>
+                <span>{{example.description}}</span>
                 <br><br>
                 <div class="code-box">
                     <span>{{example.input | safe}}</span>
