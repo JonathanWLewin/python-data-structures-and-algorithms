@@ -3,7 +3,7 @@ from pyrefine.Helpers.CodeFormatter import format_code
 class BaseObject():
     _title = ''
     _code = ''
-    _format_overrides = {}
+    _format_overrides = []
 
     def __init__(self) -> None:
         pass

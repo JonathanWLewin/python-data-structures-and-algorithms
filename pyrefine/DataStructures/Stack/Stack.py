@@ -9,6 +9,13 @@ class Stack():
         """
         super().__init__()
         self.stack = []
+
+    def __iter__(self) -> None:
+        """
+        Helper function to generate an iterable of the stack
+        Time Complexity O(n)
+        """
+        return reversed(self.stack)
         
     def empty(self):
         """

@@ -6,7 +6,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .hll { background-color: #ffffcc }
 .c { color: #3D7B7B; font-style: italic } /* Comment */
 .err { border: 1px solid #FF0000 } /* Error */
-.k { color: #569cd6; font-weight: bold } /* Keyword */
+.k { color: #c586c0; font-weight: bold } /* Keyword */
 .o { color: #d4d4d4 } /* Operator */
 .ch { color: #569cd6; font-style: italic } /* Comment.Hashbang */
 .cm { color: #3D7B7B; font-style: italic } /* Comment.Multiline */

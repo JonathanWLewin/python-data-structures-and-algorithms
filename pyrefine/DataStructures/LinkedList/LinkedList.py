@@ -1,11 +1,11 @@
 class Node():
-    def __init__(self, val, next=None) -> None:
+    def __init__(self, val, nxt=None) -> None:
         """
         Initialization of Node
         Time Complexity O(1)
         """
         self.val = val
-        self.next = next
+        self.nxt = nxt
 
 class LinkedList():
     def __init__(self) -> None:

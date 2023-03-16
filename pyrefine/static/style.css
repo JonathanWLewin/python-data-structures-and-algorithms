@@ -89,12 +89,20 @@ a {
     align-items: center;
 }
 
-.stack {
+.special-content-column {
+    flex-direction: column;
+}
+
+.special-content-row {
+    flex-direction: row;
+}
+
+.linked-list {
     display: flex;
     flex: 1;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .nav-button {

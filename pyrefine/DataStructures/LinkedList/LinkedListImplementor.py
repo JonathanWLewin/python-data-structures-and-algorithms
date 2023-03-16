@@ -8,14 +8,12 @@ from pyrefine.DataStructures.LinkedList import LinkedList
 
 class LinkedListImplementor(DataStructureObject):
 
-    _code = inspect.getsource(LinkedList)
+    _code_module = LinkedList
     _title = "Singly Linked List"
     _format_overrides = []
     _lst: LinkedList.LinkedList
     def __init__(self) -> None:
         super().__init__()
-        for cls in inspect.getmembers(LinkedList, inspect.isclass):
-            print(inspect.getmembers(cls[1], inspect.isfunction))
 
     def generate_examples(self):
         examples = []

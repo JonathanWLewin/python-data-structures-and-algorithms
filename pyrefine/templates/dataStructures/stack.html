@@ -1,10 +1,12 @@
 {% extends 'dataStructures/baseDataStructure.html' %}
 {% block special_content %}
     {% if example.state != None %}
+    <div class=".special-content-column">
         {% for record in example.state %}
         <div class="box">
             <span class="box-value">{{record}}</span>
         </div>
         {% endfor %}
+    </div>
     {% endif %}
 {% endblock %}
