@@ -36,20 +36,20 @@
         </div>
         <div id="nav-buttons" class="nav-buttons">
             {% if id > 1 %}
-                <form action="{{url_for('data-structures.stack', id=id -1)}}" method="GET">
+                <form action="{{url_for(request.url_rule.endpoint, id=id -1)}}" method="GET">
                     <input type="submit" value="Previous">
                 </form>
             {% else %}
-            <form action="{{url_for('data-structures.stack', id=id -1)}}" method="GET">
+            <form action="{{url_for(request.url_rule.endpoint, id=id -1)}}" method="GET">
                 <input type="submit" value="Previous" class="disabled">
             </form>
             {% endif %} 
             {% if id < length %}
-                <form action="{{url_for('data-structures.stack', id=id + 1)}}" method="GET">
+                <form action="{{url_for(request.url_rule.endpoint, id=id + 1)}}" method="GET">
                     <input type="submit" value="Next">
                 </form>
             {% else %}
-            <form action="{{url_for('data-structures.stack', id=id + 1)}}" method="GET">
+            <form action="{{url_for(request.url_rule.endpoint, id=id + 1)}}" method="GET">
                 <input type="submit" value="Next" class="disabled">
             </form>
             {% endif %} 

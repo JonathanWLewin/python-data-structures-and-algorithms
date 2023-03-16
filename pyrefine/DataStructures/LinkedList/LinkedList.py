@@ -25,7 +25,7 @@ class LinkedList():
         lst = []
         while curr:
             lst.append(curr.val)
-            curr = curr.next
+            curr = curr.nxt
         return "->".join(map(str, lst))
     
     def __iter__(self):
@@ -33,10 +33,11 @@ class LinkedList():
         Returns an iterator of the linked list
         O(n)
         """
-        curr = self.head
-        while curr:
-            yield curr.val
-            curr = curr.next
+        if self.head is not None:
+            curr = self.head
+            while curr:
+                yield curr.val
+                curr = curr.nxt
 
     @property
     def size(self):
@@ -60,9 +61,9 @@ class LinkedList():
         Time Complexity O(1)
         """
         node = Node(val)
-        node.next = self.head
+        node.nxt = self.head
         self.head = node
-        self.size += 1
+        self._size += 1
 
     def add_end(self, val):
         """
@@ -74,10 +75,10 @@ class LinkedList():
             self.head = node
         else:
             curr = self.head
-            while curr.next is not None:
-                curr = curr.next
-            curr.next = node
-        self.size += 1
+            while curr.nxt is not None:
+                curr = curr.nxt
+            curr.nxt = node
+        self._size += 1
 
     def remove_front(self):
         """
@@ -88,9 +89,9 @@ class LinkedList():
             return None
         else:
             temp = self.head
-            self.head = self.head.next
-            temp.next = None
-            self.size -= 1
+            self.head = self.head.nxt
+            temp.nxt = None
+            self._size -= 1
             return temp.val
         
     def remove_end(self):
@@ -100,16 +101,16 @@ class LinkedList():
         """
         if self.head is None:
             return None
-        elif self.head.next is None:
+        elif self.head.nxt is None:
             temp = self.head
             self.head = None
-            self.size -= 1
+            self._size -= 1
             return temp.val
         else:
             curr = self.head
-            while curr.next.next is not None:
-                curr = curr.next
-            temp = curr.next
-            curr.next = None
-            self.size -= 1
+            while curr.nxt.nxt is not None:
+                curr = curr.nxt
+            temp = curr.nxt
+            curr.nxt = None
+            self._size -= 1
             return temp.val

@@ -18,9 +18,6 @@ class DataStructureObject(BaseObject):
         for cls in inspect.getmembers(self._code_module, inspect.isclass):
             self._format_overrides.append(Override(cls[0], 'class'))
             self._format_overrides += [Override(x[0], 'func') for x in inspect.getmembers(cls[1], inspect.isfunction)]
-            print(cls)
-            print([x[0] for x in inspect.getmembers(cls[1], inspect.isfunction)])
-        print(self._format_overrides)
 
     def get_code(self):
         self._code = inspect.getsource(self._code_module)
