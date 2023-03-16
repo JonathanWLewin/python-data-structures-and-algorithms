@@ -15,7 +15,6 @@ def test_stack_examples(client):
     for i in range(len(examples)):
         response = client.get(f'/data-structures/stack/example/{i+1}')
         example = examples[i]
-        assert bytes(f'<span class="pre-wrap">{example.description}</span>', encoding='utf8') in response.data
         assert bytes(f'<h3>{example.title}</h3>', encoding='utf-8') in response.data
 
         output = example.output

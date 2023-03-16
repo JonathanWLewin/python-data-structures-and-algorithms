@@ -1,5 +1,7 @@
 class Stack():
-
+    """
+    A stack object implements Last In First Out (LIFO) or First In Last Out (FILO).
+    """
     def __init__(self) -> None:
         """
         Initialization of empty stack

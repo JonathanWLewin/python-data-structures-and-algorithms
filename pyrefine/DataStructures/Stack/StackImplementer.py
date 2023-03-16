@@ -1,18 +1,16 @@
 import inspect
+
 from pyrefine.Classes.DataStructureObject import DataStructureObject
-from pyrefine.Classes.Example import Example 
+from pyrefine.Classes.Example import Example
+from pyrefine.Classes.Override import Override
 from pyrefine.DataStructures.Stack.Stack import Stack
 from pyrefine.Helpers.CodeFormatter import format_code
 
-from pyrefine.Classes.Override import Override
 
 class StackImplementer(DataStructureObject):
-    _description = """
-    A stack object implements First In First Out (FIFO).
-    """
     _code = inspect.getsource(Stack)
     _title = "Stack"
-    _overrides = [
+    _format_overrides = [
         Override('empty', 'func'),
         Override('size', 'func'),
         Override('top', 'func'),
