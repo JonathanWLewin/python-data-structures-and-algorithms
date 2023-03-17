@@ -120,45 +120,45 @@ class LinkedList():
         Insert node at index
         Time Complexity O(n)
         """
-        if self.size < index or index < 0:
+        if self._size < index or index < 0:
             raise IndexError('Index provided larger than the size of the list')
         if index == 0:
             self.add_front(val)
-        if index == self.size:
+        if index == self._size:
             self.add_end(val)
         else:
             node = Node(val)
             curr = self.head
-            for i in range(index):
+            for i in range(index - 1):
                 curr = curr.nxt
             node.nxt = curr.nxt
             curr.nxt = node
-            self.size += 1
+            self._size += 1
         
     def remove_at_index(self, index):
         """
         Remove node at index
         Time Complexity O(n)
         """
-        if self.size < index or index < 0:
+        if self._size < index or index < 0:
             raise IndexError('Index provided larger than the size of the list')
         elif index == 0:
             self.remove_front()
-        elif index == self.size - 1:
+        elif index == self._size - 1:
             self.remove_end()
         else:
             curr = self.head
             for i in range(index - 1):
                 curr = curr.nxt
             curr.nxt = curr.nxt.nxt
-            self.size =- 1
+            self._size -= 1
             
     def get_val_at_index(self, index):
         """
         Get the value from a node at a specific index
         Time Complexity O(n)
         """
-        if self.size < index or index < 0:
+        if self._size < index or index < 0:
             raise IndexError('Index provided larger than the size of the list')
         elif index == 0:
             return self.head.val

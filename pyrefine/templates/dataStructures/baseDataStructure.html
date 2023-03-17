@@ -19,13 +19,11 @@
                 <div class="code-box">
                     <span>{{example.input | safe}}</span>
                 </div>
-            {% if example.output != '' %}
                 <div class="output-box">
                     <h3>Output</h3>
                     <span class="pre-wrap">{{example.output}}</span>
                 </div>
-                <br><br>
-            {% endif %}
+            <br><br>
             </div>
             <div class="special-content">
                 {% if example.state != null %}

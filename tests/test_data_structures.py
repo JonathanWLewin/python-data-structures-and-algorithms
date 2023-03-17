@@ -1,4 +1,41 @@
+import pytest
+
+from pyrefine.Classes.DataStructureObject import DataStructureObject
+from pyrefine.DataStructures.LinkedList.LinkedListImplementor import LinkedListImplementor
 from pyrefine.DataStructures.Stack.StackImplementer import StackImplementer
+
+ENCODING='utf-8'
+
+@pytest.mark.parametrize("obj, url", [
+    (StackImplementer(), "/data-structures/stack/example/"), 
+    (LinkedListImplementor(), "/data-structures/linkedlist/example/")
+    ])
+def test_data_structure(client, obj: DataStructureObject, url):
+    title, code, examples = obj.get_template_values()
+    length = len(examples)
+
+    for i in range(length):
+        example = examples[i]
+        data = client.get(url + f'{i + 1}').data
+        assert bytes(f'<h1>{title}</h1>', encoding=ENCODING) in data
+        assert bytes(f'<span>{code}</span>', encoding=ENCODING) in data
+        assert bytes(f'<h3>{example.title}</h3>', encoding='utf-8') in data
+        assert bytes(f'<span>{example.description}</span>', encoding=ENCODING)in data
+        assert bytes(f'<span>{example.input}</span>', encoding=ENCODING) in data
+        assert bytes(f'<span class="pre-wrap">{example.output}</span>', encoding=ENCODING)  in data
+        for value in example.state:
+            assert bytes(f'<span class="box-value">{value}</span>', encoding='utf8') in data
+        
+        if i == 0:
+            assert b'<input type="submit" value="Next">' in data
+            assert b'<input type="submit" value="Previous" class="disabled">' in data
+        elif i == length - 1:
+            assert b'<input type="submit" value="Next" class="disabled">' in data
+            assert b'<input type="submit" value="Previous">' in data
+        else:
+            assert b'<input type="submit" value="Next">' in data
+            assert b'<input type="submit" value="Previous">' in data
+
 
 def test_nav_buttons(client):
     stack = StackImplementer()
@@ -7,23 +44,3 @@ def test_nav_buttons(client):
     assert b'<input type="submit" value="Previous" class="disabled">' in response_1.data
     response_2 = client.get(f'/data-structures/stack/example/{len(examples)}')
     assert b'<input type="submit" value="Next" class="disabled">' in response_2.data
-
-def test_stack_examples(client):
-    stack = StackImplementer()
-    examples = stack.generate_examples()
-
-    for i in range(len(examples)):
-        response = client.get(f'/data-structures/stack/example/{i+1}')
-        example = examples[i]
-        assert bytes(f'<h3>{example.title}</h3>', encoding='utf-8') in response.data
-
-        output = example.output
-        state = example.state
-        if output != '':
-            assert b"output" in response.data
-            assert bytes(f'<span class="pre-wrap">{output}</span>', encoding='utf8') in response.data
-        else:
-            assert b"output" not in response.data
-
-        for value in state:
-            assert bytes(f'<span class="box-value">{value}</span>', encoding='utf8') in response.data

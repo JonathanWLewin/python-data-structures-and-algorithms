@@ -65,6 +65,7 @@ a {
     tab-size: 4;
     word-wrap: break-word;
     color: #000;
+    min-height: 5vh;
 }
 
 .output-box h3 {
