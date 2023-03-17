@@ -90,19 +90,31 @@ a {
 }
 
 .special-content-column {
+    display: flex;
     flex-direction: column;
 }
 
 .special-content-row {
+    display: flex;
     flex-direction: row;
 }
 
-.linked-list {
+.linked-list-link-box {
+    width: 3vw;
+    height: 3vw;
     display: flex;
-    flex: 1;
-    justify-content: center;
     align-items: center;
-    flex-direction: row;
+    justify-content: center;
+}
+
+.linked-list-link {
+    width: 4vw;
+    height: 1vw;
+    background-color: #f0f0f0;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-button {

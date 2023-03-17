@@ -23,4 +23,15 @@ class LinkedListImplementor(DataStructureObject):
         examples.append(self.create_example_with_state('Add to front', 'Add value to the front of the linked list', 'lst.add_front(1)'))
         self._structure.add_front(3)
         examples.append(self.create_example_with_state('Add to front', 'Add value to the front of the linked list', 'lst.add_front(3)'))
+        self._structure.add_front(4)
+        examples.append(self.create_example_with_state('Add to front', 'Add value to the front of the linked list', 'lst.add_front(4)'))
+        self._structure.add_front(6)
+        self._structure.add_front(8)
+        self._structure.add_front(15)
+        self._structure.add_front(35)
+        add_front_str = """self._structure.add_front(6)
+self._structure.add_front(8)
+self._structure.add_front(15)
+self._structure.add_front(35)"""
+        examples.append(self.create_example_with_state('Add to front', 'Add value to the front of the linked list', add_front_str))
         return examples

@@ -114,3 +114,70 @@ class LinkedList():
             curr.nxt = None
             self._size -= 1
             return temp.val
+        
+    def insert_at_index(self, val, index):
+        """
+        Insert node at index
+        Time Complexity O(n)
+        """
+        if self.size < index or index < 0:
+            raise IndexError('Index provided larger than the size of the list')
+        if index == 0:
+            self.add_front(val)
+        if index == self.size:
+            self.add_end(val)
+        else:
+            node = Node(val)
+            curr = self.head
+            for i in range(index):
+                curr = curr.nxt
+            node.nxt = curr.nxt
+            curr.nxt = node
+            self.size += 1
+        
+    def remove_at_index(self, index):
+        """
+        Remove node at index
+        Time Complexity O(n)
+        """
+        if self.size < index or index < 0:
+            raise IndexError('Index provided larger than the size of the list')
+        elif index == 0:
+            self.remove_front()
+        elif index == self.size - 1:
+            self.remove_end()
+        else:
+            curr = self.head
+            for i in range(index - 1):
+                curr = curr.nxt
+            curr.nxt = curr.nxt.nxt
+            self.size =- 1
+            
+    def get_val_at_index(self, index):
+        """
+        Get the value from a node at a specific index
+        Time Complexity O(n)
+        """
+        if self.size < index or index < 0:
+            raise IndexError('Index provided larger than the size of the list')
+        elif index == 0:
+            return self.head.val
+        else:
+            curr = self.head
+            for i in range(index):
+                curr = curr.nxt
+            return curr.val
+        
+    def find_val_in_list(self, val):
+        """
+        Find the first node with the given value and return the index, return -1 if not found
+        Time Complexity O(n)
+        """
+        curr = self.head
+        i = 0
+        while curr.nxt is not None:
+            if curr.val == val:
+                return i
+            curr = curr.nxt
+            i += 1
+        return -1

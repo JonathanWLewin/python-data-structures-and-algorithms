@@ -17,6 +17,7 @@ class Stack():
         """
         return reversed(self.stack)
         
+    @property
     def empty(self):
         """
         Check if stack is empty
