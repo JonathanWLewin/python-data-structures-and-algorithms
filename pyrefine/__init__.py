@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template
 
 from pyrefine.DataStructures import DataStructures
-
+from pyrefine.Algorithms import Algorithms
 
 def create_app(test_config=None):
     # create and configure the app
@@ -30,4 +30,5 @@ def create_app(test_config=None):
         return render_template('index.html')
     
     app.register_blueprint(DataStructures.bp)
+    app.register_blueprint(Algorithms.bp)
     return app

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, abort
 from pyrefine.DataStructures.Stack.StackImplementer import StackImplementer
-from pyrefine.DataStructures.LinkedList.LinkedListImplementor import LinkedListImplementor
-from pyrefine.DataStructures.DoublyLinkedList.DoublyLinkedListImplementor import DoublyLinkedListImplementor
+from pyrefine.DataStructures.LinkedList.LinkedListImplementer import LinkedListImplementer
+from pyrefine.DataStructures.DoublyLinkedList.DoublyLinkedListImplementer import DoublyLinkedListImplementer
 
 bp = Blueprint("data-structures", __name__, url_prefix="/data-structures")
 
@@ -17,7 +17,7 @@ def stack(id):
 
 @bp.route("linkedlist/example/<int:id>")
 def linked_list(id):
-    lst = LinkedListImplementor()
+    lst = LinkedListImplementer()
     title, code, examples = lst.get_template_values()
     length = len(examples)
     if id < 1 or id > length:
@@ -27,7 +27,7 @@ def linked_list(id):
 
 @bp.route("doublelinkedlist/example/<int:id>")
 def double_linked_list(id):
-    lst = DoublyLinkedListImplementor()
+    lst = DoublyLinkedListImplementer()
     title, code, examples = lst.get_template_values()
     length = len(examples)
     if id < 1 or id > length:

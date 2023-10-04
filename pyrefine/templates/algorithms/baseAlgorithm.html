@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}{{title}}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="code-box">
+        <span>{{code | safe}}</span>
+    </div>
+    
+{% endblock %}

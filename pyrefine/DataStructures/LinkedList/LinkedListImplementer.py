@@ -6,7 +6,7 @@ from pyrefine.Classes.Override import Override
 from pyrefine.DataStructures.LinkedList import LinkedList
 
 
-class LinkedListImplementor(DataStructureObject):
+class LinkedListImplementer(DataStructureObject):
 
     _code_module = LinkedList
     _title = "Singly Linked List"

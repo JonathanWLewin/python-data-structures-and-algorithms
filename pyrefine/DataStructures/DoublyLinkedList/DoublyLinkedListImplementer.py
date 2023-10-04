@@ -6,7 +6,7 @@ from pyrefine.Classes.Override import Override
 from pyrefine.DataStructures.DoublyLinkedList import DoublyLinkedList
 
 
-class DoublyLinkedListImplementor(DataStructureObject):
+class DoublyLinkedListImplementer(DataStructureObject):
 
     _code_module = DoublyLinkedList
     _title = "Doubly Linked List"

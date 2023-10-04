@@ -1,14 +1,14 @@
 import pytest
 
 from pyrefine.Classes.DataStructureObject import DataStructureObject
-from pyrefine.DataStructures.LinkedList.LinkedListImplementor import LinkedListImplementor
+from pyrefine.DataStructures.LinkedList.LinkedListImplementer import LinkedListImplementer
 from pyrefine.DataStructures.Stack.StackImplementer import StackImplementer
 
 ENCODING='utf-8'
 
 @pytest.mark.parametrize("obj, url", [
     (StackImplementer(), "/data-structures/stack/example/"), 
-    (LinkedListImplementor(), "/data-structures/linkedlist/example/")
+    (LinkedListImplementer(), "/data-structures/linkedlist/example/")
     ])
 def test_data_structure(client, obj: DataStructureObject, url):
     title, code, examples = obj.get_template_values()
