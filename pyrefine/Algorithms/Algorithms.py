@@ -7,4 +7,4 @@ bp = Blueprint("algorithms", __name__, url_prefix="/algorithms")
 def twoSum(id):
     twoSum = TwoSumImplementer()
     title, code = twoSum.get_template_values()
-    return render_template("algorithms/baseAlgorithm.html", title=title, code=code)
+    return render_template("algorithms/baseAlgorithm.html", title=title, code=code, id=id, length=10, implementations={'test': 'test1', 'test2': 'test3'})

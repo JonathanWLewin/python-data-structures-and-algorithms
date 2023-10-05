@@ -5,8 +5,86 @@
 {% endblock %}
 
 {% block content %}
-    <div class="code-box">
-        <span>{{code | safe}}</span>
-    </div>
+    <body onload="scrollToElement()">
+        <div class="code-box">
+            <span>{{code | safe}}</span>
+        </div>
+    </body>
     
+    <footer class="not-sticky-footer">
+        <div class="code-box">
+            <div class="text-center">
+                <p>This is your footer content.</p>
+            </div>
+            <div>
+                {% for key, value in implementations.items() %}
+                    <h1>Key: {{key}}</h1>
+                    <h2>Value: {{value}}</h2>
+                {% endfor %}
+            </div>
+            <div id="nav-buttons" class="nav-buttons">
+                {% if id > 1 %}
+                    <form action="{{url_for(request.url_rule.endpoint, id=id -1)}}" method="GET">
+                        <input type="submit" value="Previous">
+                    </form>
+                {% else %}
+                <form action="{{url_for(request.url_rule.endpoint, id=id -1)}}" method="GET">
+                    <input type="submit" value="Previous" class="disabled">
+                </form>
+                {% endif %} 
+                {% if id < length %}
+                    <form action="{{url_for(request.url_rule.endpoint, id=id + 1)}}" method="GET">
+                        <input type="submit" value="Next">
+                    </form>
+                {% else %}
+                <form action="{{url_for(request.url_rule.endpoint, id=id + 1)}}" method="GET">
+                    <input type="submit" value="Next" class="disabled">
+                </form>
+                {% endif %} 
+            </div>
+        </div>
+    </footer>
+
+    <!-- Footer -->
+    <footer class="sticky-footer">
+        <div class="code-box">
+            <div class="text-center">
+                <p>This is your footer content.</p>
+            </div>
+            <div>
+                {% for key, value in implementations.items() %}
+                    <h1>Key: {{key}}</h1>
+                    <h2>Value: {{value}}</h2>
+                {% endfor %}
+            </div>
+            <div id="nav-buttons" class="nav-buttons">
+                {% if id > 1 %}
+                    <form action="{{url_for(request.url_rule.endpoint, id=id -1)}}" method="GET">
+                        <input type="submit" value="Previous">
+                    </form>
+                {% else %}
+                <form action="{{url_for(request.url_rule.endpoint, id=id -1)}}" method="GET">
+                    <input type="submit" value="Previous" class="disabled">
+                </form>
+                {% endif %} 
+                {% if id < length %}
+                    <form action="{{url_for(request.url_rule.endpoint, id=id + 1)}}" method="GET">
+                        <input type="submit" value="Next">
+                    </form>
+                {% else %}
+                <form action="{{url_for(request.url_rule.endpoint, id=id + 1)}}" method="GET">
+                    <input type="submit" value="Next" class="disabled">
+                </form>
+                {% endif %} 
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        function scrollToElement() {
+            var element = document.getElementById("anchor_1");
+            element.scrollIntoView();
+        }
+    </script>
+
 {% endblock %}
