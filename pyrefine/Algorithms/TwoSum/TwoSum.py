@@ -35,6 +35,7 @@ def two_sum_brute_force(nums, target):
                 return [i, j]
     return []
 
+'anchor_2'
 def two_sum_one_pass_hash_table(nums, target):
     '''
         O(n)
@@ -54,7 +55,7 @@ def two_sum_one_pass_hash_table(nums, target):
         numberMap[nums[i]] = i
     return []
 
-
+'anchor_3'
 def two_sum_two_pass_hash_table(nums, target):
     '''
         O(n)

@@ -11,75 +11,6 @@
         </div>
     </body>
     
-    <footer class="not-sticky-footer">
-        <div class="code-box">
-            <div class="text-center">
-                <p>This is your footer content.</p>
-            </div>
-            <div>
-                {% for key, value in implementations.items() %}
-                    <h1>Key: {{key}}</h1>
-                    <h2>Value: {{value}}</h2>
-                {% endfor %}
-            </div>
-            <div id="nav-buttons" class="nav-buttons">
-                {% if id > 1 %}
-                    <form action="{{url_for(request.url_rule.endpoint, id=id -1)}}" method="GET">
-                        <input type="submit" value="Previous">
-                    </form>
-                {% else %}
-                <form action="{{url_for(request.url_rule.endpoint, id=id -1)}}" method="GET">
-                    <input type="submit" value="Previous" class="disabled">
-                </form>
-                {% endif %} 
-                {% if id < length %}
-                    <form action="{{url_for(request.url_rule.endpoint, id=id + 1)}}" method="GET">
-                        <input type="submit" value="Next">
-                    </form>
-                {% else %}
-                <form action="{{url_for(request.url_rule.endpoint, id=id + 1)}}" method="GET">
-                    <input type="submit" value="Next" class="disabled">
-                </form>
-                {% endif %} 
-            </div>
-        </div>
-    </footer>
-
-    <!-- Footer -->
-    <footer class="sticky-footer">
-        <div class="code-box">
-            <div class="text-center">
-                <p>This is your footer content.</p>
-            </div>
-            <div>
-                {% for key, value in implementations.items() %}
-                    <h1>Key: {{key}}</h1>
-                    <h2>Value: {{value}}</h2>
-                {% endfor %}
-            </div>
-            <div id="nav-buttons" class="nav-buttons">
-                {% if id > 1 %}
-                    <form action="{{url_for(request.url_rule.endpoint, id=id -1)}}" method="GET">
-                        <input type="submit" value="Previous">
-                    </form>
-                {% else %}
-                <form action="{{url_for(request.url_rule.endpoint, id=id -1)}}" method="GET">
-                    <input type="submit" value="Previous" class="disabled">
-                </form>
-                {% endif %} 
-                {% if id < length %}
-                    <form action="{{url_for(request.url_rule.endpoint, id=id + 1)}}" method="GET">
-                        <input type="submit" value="Next">
-                    </form>
-                {% else %}
-                <form action="{{url_for(request.url_rule.endpoint, id=id + 1)}}" method="GET">
-                    <input type="submit" value="Next" class="disabled">
-                </form>
-                {% endif %} 
-            </div>
-        </div>
-    </footer>
-    
     <script>
         function scrollToElement() {
             var element = document.getElementById("anchor_1");
@@ -87,4 +18,50 @@
         }
     </script>
 
+{% endblock %}
+
+{% block stickyFooter %}
+<!-- Footer -->
+<div class="col-values">
+    <div class="row-values">
+        {% for example_id in range(examples_length) %}
+            <form action="{{url_for(request.url_rule.endpoint, id=id, example=example_id)}}" method="GET">
+                <input type="submit" value="Example {{example_id + 1}}">
+            </form>
+        {% endfor %}
+    </div>
+    <h2>Example {{example}}</h2>
+    <span>Input: {{example_values.input}}</span>
+    <span>Expected output: {{example_values.output}}</span>
+</div>
+<div>
+    {% for key, val in step.items() %}
+    {% if key != "special_content" %}
+    <div>
+        <span>{{key}}</span>
+        <div class="value-display">{{val}}</div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    <div id="nav-buttons" class="nav-buttons">
+        {% if id > 1 %}
+        <form action="{{url_for(request.url_rule.endpoint, example=example, id=id -1)}}" method="GET">
+            <input type="submit" value="Previous">
+        </form>
+        {% else %}
+        <form action="{{url_for(request.url_rule.endpoint, example=example, id=id -1)}}" method="GET">
+            <input type="submit" value="Previous" class="disabled">
+        </form>
+        {% endif %} 
+        {% if id < length %}
+        <form action="{{url_for(request.url_rule.endpoint, example=example, id=id + 1)}}" method="GET">
+            <input type="submit" value="Next">
+        </form>
+        {% else %}
+        <form action="{{url_for(request.url_rule.endpoint, example=example, id=id + 1)}}" method="GET">
+            <input type="submit" value="Next" class="disabled">
+        </form>
+        {% endif %} 
+    </div>
+</div>
 {% endblock %}

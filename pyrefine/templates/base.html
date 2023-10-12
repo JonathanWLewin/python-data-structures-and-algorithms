@@ -10,3 +10,12 @@
   </header>
   {% block content %}{% endblock %}
 </section>
+{%- macro footer() -%}
+  {% block stickyFooter %}{% endblock %}
+{%- endmacro -%}
+<section class="sticky-footer">
+  {{ footer()}}
+</section>
+<section class="not-sticky-footer">
+  {{ footer()}}
+</section>

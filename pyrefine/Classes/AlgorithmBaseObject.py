@@ -7,6 +7,7 @@ class AlgorithmBaseObject():
     _title = ''
     _code_module: any
     _format_overrides = []
+    _examples = []
 
     def __init__(self) -> None:
         self.get_format_overrides_from_code()
@@ -24,5 +25,11 @@ class AlgorithmBaseObject():
     def format_code_with_override(self, code) -> str:
         return format_code(code, self._format_overrides)
     
-    def get_template_values(self):
-        return self._title, self.format_code_with_override(self._code)
+    def get_template_values(self, example=1):
+        return self._title, self.format_code_with_override(self._code), self.generate_example(example_number=example), self._examples
+    
+    def generate_steps(self):
+        pass
+
+    def generate_example(self, example_number=None, inputted_example=None):
+        pass
