@@ -13,7 +13,7 @@
     
     <script>
         function scrollToElement() {
-            var element = document.getElementById("anchor_1");
+            var element = document.getElementById('{{anchor}}');
             element.scrollIntoView();
         }
     </script>
@@ -21,47 +21,111 @@
 {% endblock %}
 
 {% block stickyFooter %}
-<!-- Footer -->
-<div class="col-values">
-    <div class="row-values">
-        {% for example_id in range(examples_length) %}
-            <form action="{{url_for(request.url_rule.endpoint, id=id, example=example_id)}}" method="GET">
-                <input type="submit" value="Example {{example_id + 1}}">
+    <!-- Footer -->
+    <div class="col-values">
+        <!-- Display information for selected example -->
+        {% if example %}
+            <h2>Example {{example}}</h2>
+            <span>Input: {{example_values.input}}</span>
+            <span>Target: {{example_values.target}}</span>
+            <span>Expected output: {{example_values.output}}</span>
+        {% else %}
+        <!-- On custom example display form values for overwrite and saving -->
+        <form method="post" class="col-values">
+            <label for="input">Input (example: 1,2,3,4,5)</label>
+            <input name="input" id="input" value="{{custom_example_input}}" required>
+            <label for="target">Target</label>
+            <input name="target" id="target" value="{{target}}" required>
+            <input type="submit" value="Save">
+        </form>
+        {% endif %}
+        <!-- List out examples as buttons to redirect -->
+        <div class="row-values">
+            {% for example_id in range(examples_length) %}
+                <form action="{{url_for(request.url_rule.endpoint, id=1, example=example_id + 1, method=method)}}" method="GET">
+                    <input type="submit" value="Example {{example_id + 1}}">
+                </form>
+            {% endfor %}
+            <!-- Display custom example button -->
+            <form action="{{url_for(request.url_rule.endpoint, id=1, method=method)}}" method="GET">
+                <input type="submit" value="Custom">
             </form>
-        {% endfor %}
+        </div>
     </div>
-    <h2>Example {{example}}</h2>
-    <span>Input: {{example_values.input}}</span>
-    <span>Expected output: {{example_values.output}}</span>
-</div>
-<div>
-    {% for key, val in step.items() %}
-    {% if key != "special_content" %}
-    <div>
+    <!-- If there are values to display to the user enumerate through and display -->
+    {% if step["values_to_display"] %}
+    <div class="col-values">
+    {% for key in step["values_to_display"] %}
         <span>{{key}}</span>
-        <div class="value-display">{{val}}</div>
+        {{step["values_to_display"][key]}}
+    {% endfor %}
     </div>
     {% endif %}
-    {% endfor %}
-    <div id="nav-buttons" class="nav-buttons">
-        {% if id > 1 %}
-        <form action="{{url_for(request.url_rule.endpoint, example=example, id=id -1)}}" method="GET">
-            <input type="submit" value="Previous">
-        </form>
-        {% else %}
-        <form action="{{url_for(request.url_rule.endpoint, example=example, id=id -1)}}" method="GET">
-            <input type="submit" value="Previous" class="disabled">
-        </form>
-        {% endif %} 
-        {% if id < length %}
-        <form action="{{url_for(request.url_rule.endpoint, example=example, id=id + 1)}}" method="GET">
-            <input type="submit" value="Next">
-        </form>
-        {% else %}
-        <form action="{{url_for(request.url_rule.endpoint, example=example, id=id + 1)}}" method="GET">
-            <input type="submit" value="Next" class="disabled">
-        </form>
-        {% endif %} 
+    <!-- For an array type display array values -->
+    <div class="col-values">
+        <div class="row-values">
+            {% for ind in range(input_length) %}
+            <div class="col-values-centered">
+                <!-- Check each index, if the index is the same as passed in i or j, display arrow above -->
+                {% if step["i"] == ind %}
+                <!-- If the answer has been found then change arrow colour to green -->
+                {% if step["answer_found"] %}
+                <span class="i_j_indicators">i</span>
+                <div class="arrow-down-green"></div>
+                {% else %}
+                <span class="i_j_indicators">i</span>
+                <div class="arrow-down"></div>
+                {% endif %}
+                {% elif step["j"] == ind %}
+                <!-- If the answer has been found then change arrow colour to green -->
+                {% if step["answer_found"] %}
+                <span class="i_j_indicators">j</span>
+                <div class="arrow-down-green"></div>
+                {% else %}
+                <span class="i_j_indicators">j</span>
+                <div class="arrow-down"></div>
+                {% endif %}
+                {% else %}
+                <!-- Display the arrow hidden to still make space above the box -->
+                <span class="hidden_i_j_indicators">i</span>
+                <div class="arrow-down-hidden"></div>
+                {% endif %}
+                <div class="box">
+                    <span class="box-value">{{example_values.input[ind]}}</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- Nav buttons for moving through steps -->
+        <div id="nav-buttons" class="nav-buttons">
+            {% if id > 1 %}
+            <form action="{{url_for(request.url_rule.endpoint, id=id -1, example=example, custom_example_input=custom_example_input, target=target, method=method)}}" method="GET">
+                <input type="submit" value="Previous">
+            </form>
+            {% else %}
+            <form action="{{url_for(request.url_rule.endpoint, id=id -1, example=example, custom_example_input=custom_example_input, target=target, method=method)}}" method="GET">
+                <input type="submit" value="Previous" class="disabled">
+            </form>
+            {% endif %} 
+            {% if id < length %}
+            <form action="{{url_for(request.url_rule.endpoint, id=id + 1, example=example, custom_example_input=custom_example_input, target=target, method=method)}}" method="GET">
+                <input type="submit" value="Next">
+            </form>
+            {% else %}
+            <form action="{{url_for(request.url_rule.endpoint, id=id + 1, example=example, custom_example_input=custom_example_input, target=target, method=method)}}" method="GET">
+                <input type="submit" value="Next" class="disabled">
+            </form>
+            {% endif %} 
+        </div>
     </div>
-</div>
+
+    <div class="col-values-flex-start">
+        <!-- For each method add a button to switch to that method -->
+        <h2>Methods</h2>
+        {% for method_value in methods %}
+        <form action="{{url_for(request.url_rule.endpoint, id=1, example=example, custom_example_input=custom_example_input, target=target, method=method_value)}}" method="GET">
+            <input type="submit" value="{{method_value}}">
+        </form>
+        {% endfor %}
+    </div>
 {% endblock %}
