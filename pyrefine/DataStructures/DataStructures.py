@@ -33,4 +33,4 @@ def double_linked_list(id):
     if id < 1 or id > length:
         abort(404)
     example = examples[id - 1]
-    return render_template("dataStructures/doublyLinkedList.html", title=title, code=code, example=example, length=length, id=id)
+    return render_template("dataStructures/linkedList.html", title=title, code=code, example=example, length=length, id=id)

@@ -53,7 +53,6 @@ class TwoSumImplementer(AlgorithmBaseObject):
                 "input": custom_example_input,
                 "target": target
             }
-            steps = self.generate_steps(example["input"], example["target"], method)
         
         steps = self.generate_steps(example["input"], example["target"], method)
         example["steps"] = steps

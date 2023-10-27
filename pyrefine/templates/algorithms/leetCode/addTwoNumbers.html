@@ -1,0 +1,73 @@
+{% extends 'algorithms/baseAlgorithm.html' %}
+
+{% block input_fields %}
+    {% if example %}
+    <h2>Example {{example}}</h2>
+    <span>Input: L1: {{example_values.input["L1"]}}, L2: {{example_values.input["L2"]}}</span>
+    <span>Expected output: {{example_values.output}}</span>
+    {% else %}
+    <!-- On custom example display form values for overwrite and saving -->
+    <form method="post" class="col-values">
+    <label for="l1Input">L1 Input (example: 1,2,3,4,5)</label>
+    <input name="l1Input" id="l1Input" value="{{custom_example_input['L1']}}" required>
+    <label for="l2Input">L2 Input (example: 1,2,3,4,5)</label>
+    <input name="l2Input" id="l2Input" value="{{custom_example_input['L2']}}" required>
+    <input type="submit" value="Save">
+    </form>
+    {% endif %}
+{% endblock %}
+
+{% block special_content %}
+    <div class="row-values">
+        {% for ind in range(input_l1_length) %}
+            {% if ind == step["L1"]["id"] %}
+            <div class="box-blue">
+                <span class="box-value">{{example_values["input"]["L1"][ind]}}</span>
+            </div>
+            {% else %}
+            <div class="box">
+                <span class="box-value">{{example_values["input"]["L1"][ind]}}</span>
+            </div>
+            {% endif %}
+            {% if ind < input_l1_length - 1 %}
+                <div class="linked-list-link-box">
+                    <span class="linked-list-link"></span>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+
+    <div class="row-values">
+        {% for ind in range(input_l2_length) %}
+            {% if ind == step["L2"]["id"] %}
+            <div class="box-blue">
+                <span class="box-value">{{example_values["input"]["L2"][ind]}}</span>
+            </div>
+            {% else %}
+            <div class="box">
+                <span class="box-value">{{example_values["input"]["L2"][ind]}}</span>
+            </div>
+            {% endif %}
+            {% if ind < input_l2_length - 1 %}
+                <div class="linked-list-link-box">
+                    <span class="linked-list-link"></span>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <h2>Output</h2>
+    <div class="row-values">
+        {% for ind in range(values_arr_length) %}
+            <div class="box">
+                <span class="box-value">{{step["values_arr"][ind]}}</span>
+            </div>
+            {% if ind < values_arr_length - 1 %}
+                <div class="linked-list-link-box">
+                    <span class="linked-list-link"></span>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

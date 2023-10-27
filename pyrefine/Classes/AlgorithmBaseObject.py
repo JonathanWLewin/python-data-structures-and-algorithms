@@ -32,6 +32,7 @@ class AlgorithmBaseObject():
     
     def get_template_values(self, example=None, custom_example_input=None, target=None, method=None):
         # Pull values required for template and return
+        anchors = self._anchors[method] if self._anchors.get(method) else None
         return (
             self._title, 
             self.format_code_with_override(self._code), 
@@ -43,8 +44,9 @@ class AlgorithmBaseObject():
             ), 
             self._examples,
             self._methods,
-            self._anchors[method]
+            anchors
         )
+        
     
     def generate_steps(self):
         pass
