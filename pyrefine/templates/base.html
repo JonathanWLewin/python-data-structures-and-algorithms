@@ -1,12 +1,12 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - PyRefine</title>
+<title>{{title}} - PyRefine</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav class="navheader">
     <h1><a href="{{ url_for('index') }}">PyRefine</a></h1>
 </nav>
 <section class="content">
   <header>
-    {% block header %}{% endblock %}
+    <h1>{% block title %}{{title}}{% endblock %}</h1>
   </header>
   {% block content %}{% endblock %}
 </section>

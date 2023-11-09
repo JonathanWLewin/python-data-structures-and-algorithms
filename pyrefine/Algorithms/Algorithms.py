@@ -38,9 +38,10 @@ def twoSum(id=1, example=None, custom_example_input=None, target=None, method=No
 
     # Generate the example and steps
     title, code, example_values, examples, methods, anchor = twoSum.get_template_values(
-        example=example_in, 
-        custom_example_input=custom_example_input, 
-        target=target, method=method
+        example=example_in,
+        custom_example_input=custom_example_input,
+        target=target,
+        method=method
     )
 
     # Pull steps from the example_values
@@ -74,13 +75,12 @@ def twoSum(id=1, example=None, custom_example_input=None, target=None, method=No
         method=method
     )
 
-@bp.route("add-two-numbers/method/Enumerate/example/<int:example>/step/<int:id>")
-@bp.route("add-two-numbers/method/Enumerate/example/custom/step/<int:id>", methods=["GET", "POST"])
-@bp.route("add-two-numbers/method/Enumerate/example/custom/step/<int:id>/<string:custom_example_input>")
-def addTwoNumbers(id=1, example=None, custom_example_input=None):
+@bp.route("add-two-numbers/method/<string:method>/example/<int:example>/step/<int:id>")
+@bp.route("add-two-numbers/method/<string:method>/example/custom/step/<int:id>", methods=["GET", "POST"])
+@bp.route("add-two-numbers/method/<string:method>/example/custom/step/<int:id>/<string:custom_example_input>", methods=["GET", "POST"])
+def addTwoNumbers(id=1, example=None, custom_example_input=None, method=None):
     method = "Enumerate"
 
-    print(custom_example_input)
     if request.method == 'POST':
         # Post implies a custom example
         id = 1
@@ -111,7 +111,7 @@ def addTwoNumbers(id=1, example=None, custom_example_input=None):
     title, code, example_values, examples, methods, anchor = AddTwoNumbersImplementer().get_template_values(
         example=example_in,
         custom_example_input=custom_example_input
-        )
+    )
 
     # Pull steps from the example_values
     steps = example_values["steps"]
@@ -130,7 +130,6 @@ def addTwoNumbers(id=1, example=None, custom_example_input=None):
     
     values_arr_length = len(step["values_arr"])
 
-    print(custom_example_input)
     return render_template(
         "algorithms/leetCode/addTwoNumbers.html", 
         title=title, 

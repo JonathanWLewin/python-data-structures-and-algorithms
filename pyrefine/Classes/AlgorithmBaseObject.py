@@ -16,6 +16,14 @@ class AlgorithmBaseObject():
         self.get_code()
         super().__init__()
 
+    @property
+    def examples(self):
+        return self._examples
+    
+    @property
+    def methods(self):
+        return self._methods
+
     def get_format_overrides_from_code(self):
         # Get format overrides passed in as well as find members in a module to automatically override
         for cls in inspect.getmembers(self._code_module, inspect.isclass):

@@ -24,12 +24,12 @@ def test_data_structure(client, obj: DataStructureObject, url):
         data = client.get(url + f'{i + 1}').data
         assert bytes(f'<h1>{title}</h1>', encoding=ENCODING) in data
         assert bytes(f'<span>{code}</span>', encoding=ENCODING) in data
-        assert bytes(f'<h3>{example.title}</h3>', encoding='utf-8') in data
+        assert bytes(f'<h3>{example.title}</h3>', encoding=ENCODING) in data
         assert bytes(f'<span>{example.description}</span>', encoding=ENCODING)in data
         assert bytes(f'<span>{example.input}</span>', encoding=ENCODING) in data
         assert bytes(f'<span class="pre-wrap">{example.output}</span>', encoding=ENCODING)  in data
         for value in example.state:
-            assert bytes(f'<span class="box-value">{value}</span>', encoding='utf8') in data
+            assert bytes(f'<span class="box-value">{value}</span>', encoding=ENCODING) in data
         
         if i == 0:
             assert b'<input type="submit" value="Next">' in data
