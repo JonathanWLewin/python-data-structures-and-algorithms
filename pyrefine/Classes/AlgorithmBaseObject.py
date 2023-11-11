@@ -38,7 +38,7 @@ class AlgorithmBaseObject():
         # format code for display and override formatting as needed
         return format_code(code, self._format_overrides)
     
-    def get_template_values(self, example=None, custom_example_input=None, target=None, method=None):
+    def get_template_values(self, example=None, custom_example_input=None, method=None):
         # Pull values required for template and return
         anchors = self._anchors[method] if self._anchors.get(method) else None
         return (
@@ -46,8 +46,7 @@ class AlgorithmBaseObject():
             self.format_code_with_override(self._code), 
             self.generate_example(
                 example_number=example,
-                custom_example_input=custom_example_input, 
-                target=target,
+                custom_example_input=custom_example_input,
                 method=method
             ), 
             self._examples,
@@ -59,5 +58,5 @@ class AlgorithmBaseObject():
     def generate_steps(self):
         pass
 
-    def generate_example(self, example_number=None, custom_example_input=None, target=None, method=None):
+    def generate_example(self, example_number=None, custom_example_input=None, method=None):
         pass

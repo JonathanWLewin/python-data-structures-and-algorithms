@@ -39,20 +39,20 @@
         <!-- Nav buttons for moving through steps -->
         <div id="nav-buttons" class="nav-buttons">
             {% if id > 1 %}
-            <form action="{{url_for(request.url_rule.endpoint, id=id -1, example=example, custom_example_input=custom_example_input, target=target, method=method)}}" method="GET">
+            <form action="{{url_for(request.url_rule.endpoint, id=id -1, example=example, custom_example_input=custom_example_input, method=method)}}" method="GET">
                 <input type="submit" value="Previous">
             </form>
             {% else %}
-            <form action="{{url_for(request.url_rule.endpoint, id=id -1, example=example, custom_example_input=custom_example_input, target=target, method=method)}}" method="GET">
+            <form action="{{url_for(request.url_rule.endpoint, id=id -1, example=example, custom_example_input=custom_example_input, method=method)}}" method="GET">
                 <input type="submit" value="Previous" class="disabled">
             </form>
             {% endif %} 
             {% if id < length %}
-            <form action="{{url_for(request.url_rule.endpoint, id=id + 1, example=example, custom_example_input=custom_example_input, target=target, method=method)}}" method="GET">
+            <form action="{{url_for(request.url_rule.endpoint, id=id + 1, example=example, custom_example_input=custom_example_input, method=method)}}" method="GET">
                 <input type="submit" value="Next">
             </form>
             {% else %}
-            <form action="{{url_for(request.url_rule.endpoint, id=id + 1, example=example, custom_example_input=custom_example_input, target=target, method=method)}}" method="GET">
+            <form action="{{url_for(request.url_rule.endpoint, id=id + 1, example=example, custom_example_input=custom_example_input, method=method)}}" method="GET">
                 <input type="submit" value="Next" class="disabled">
             </form>
             {% endif %} 
@@ -73,7 +73,7 @@
         <!-- For each method add a button to switch to that method -->
         <h2>Methods</h2>
         {% for method_value in methods %}
-        <form action="{{url_for(request.url_rule.endpoint, id=1, example=example, custom_example_input=custom_example_input, target=target, method=method_value)}}" method="GET">
+        <form action="{{url_for(request.url_rule.endpoint, id=1, example=example, custom_example_input=custom_example_input, method=method_value)}}" method="GET">
             <input type="submit" value="{{method_value}}">
         </form>
         {% endfor %}

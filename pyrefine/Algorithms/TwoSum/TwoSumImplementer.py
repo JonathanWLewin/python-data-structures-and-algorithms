@@ -44,14 +44,14 @@ class TwoSumImplementer(AlgorithmBaseObject):
             self.two_sum_two_pass_hash_table_generate_steps(testNums, target, steps)
         return steps
     
-    def generate_example(self, example_number=None, custom_example_input=None, target=None, method=None):
+    def generate_example(self, example_number=None, custom_example_input=None, method=None):
         # Generate examples based on the example index passed in, or use the custom input and target passed in
         if example_number is not None:
             example = self._examples[example_number]
-        elif custom_example_input is not None and target is not None:
+        elif custom_example_input is not None:
             example = {
-                "input": custom_example_input,
-                "target": target
+                "input": custom_example_input["input"],
+                "target": custom_example_input["target"]
             }
         
         steps = self.generate_steps(example["input"], example["target"], method)

@@ -68,6 +68,146 @@ def test_algorithm(
                     assert b'<input type="submit" value="Previous">' in data
 
 
+def test_two_sum(client):
+    '''
+        Test two sum algorithm
+    '''
+
+    obj = TwoSumImplementer()
+    for method in obj.methods:
+
+        '''
+        =================================
+        Check Preset examples
+        =================================
+        '''
+
+        # Test each example
+        for i in range(len(obj.examples)):
+
+            example_values, steps, length = get_template_values_and_extras_for_two_sum(i, None, obj, method)
+            for j in range(length):
+                step = steps[j]
+                url = f'/algorithms/two-sum/method/{method}/example/{i + 1}/step/{j + 1}'
+
+                # Retrieve data from client
+                data = client.get(url).data
+                
+                assert bytes(f'<h2>Example {i}</h2>', encoding=ENCODING)
+                assert bytes(f'<span>Input: {example_values["input"]}</span>', encoding=ENCODING)
+                assert bytes(f'<span>Target: {example_values["target"]}</span>', encoding=ENCODING)
+                assert bytes(f'<span>Expected output: {example_values["output"]}</span>', encoding=ENCODING)
+
+                check_special_content_for_two_sum(step, example_values, data)
+
+
+        '''
+        =================================
+        Check Custom Example Default
+        =================================
+        '''
+
+        custom_example_input = {
+            "input": [5, 8, 3, 6, 7],
+            "target": 9
+        }
+        example_values, steps, length = get_template_values_and_extras_for_two_sum(None, custom_example_input, obj, method)
+        for j in range(length):
+            step = steps[j]
+            url = f'/algorithms/two-sum/method/{method}/example/custom/step/{j + 1}'
+            data = client.get(url).data
+
+            assert b'<input name="input" id="input" value="[5, 8, 3, 6, 7]" required>' in data
+            assert b'<input name="target" id="target" value="9" required>' in  data
+
+            check_special_content_for_two_sum(step, example_values, data)
+
+        '''
+        =================================
+        Check Custom Example Post
+        =================================
+        '''
+
+        custom_example_input = {
+            "input": [7, 1, 5, 9, 4, 6],
+            "target": 10
+        }
+
+        custom_example_input_for_url = {
+            "input": "[7, 1, 5, 9, 4, 6]",
+            "target": "10"
+        }
+
+        example_values, steps, length = get_template_values_and_extras_for_two_sum(None, custom_example_input, obj, method)
+        url = f'/algorithms/two-sum/method/{method}/example/custom/step/{1}'
+        data = client.post(url, data=custom_example_input_for_url).data
+
+        assert b'<input name="input" id="input" value="[7, 1, 5, 9, 4, 6]" required>' in data
+        assert b'<input name="target" id="target" value="10" required>' in  data
+
+        step = steps[0]
+        check_special_content_for_two_sum(step, example_values, data)
+
+        '''
+        =================================
+        Check Custom Example Get
+        =================================
+        '''
+
+        custom_example_input = {
+            "input": [7, 1, 5, 9, 4, 6],
+            "target": 10
+        }
+
+        custom_example_input_for_url = "{'input': [7, 1, 5, 9, 4, 6], 'target': 10}"
+
+        example_values, steps, length = get_template_values_and_extras_for_two_sum(None, custom_example_input, obj, method)
+
+        for j in range(length):
+            step = steps[j]
+            url = f'/algorithms/two-sum/method/{method}/example/custom/step/{j + 1}/{custom_example_input_for_url}'
+            data = client.get(url).data
+
+            assert b'<input name="input" id="input" value="[7, 1, 5, 9, 4, 6]" required>' in data
+            assert b'<input name="target" id="target" value="10" required>' in  data
+
+            check_special_content_for_two_sum(step, example_values, data)
+
+
+def check_special_content_for_two_sum(step, example_values, data):
+    input_length = len(example_values["input"])
+    for ind in range(input_length):
+        assert bytes(f'''<div class="box">
+                <span class="box-value">{example_values["input"][ind]}</span>
+            </div>''', encoding=ENCODING) in data
+        
+        if step["answer_found"]:
+            assert b'''<span class="i_j_indicators">i</span>
+            <div class="arrow-down-green"></div>'''
+            if "j" in step:
+                assert b'''<span class="i_j_indicators">j</span>
+                <div class="arrow-down-green"></div>'''
+        else:
+            assert b'''<span class="i_j_indicators">i</span>
+            <div class="arrow-down"></div>'''
+            if "j" in step:
+                assert b'''<span class="i_j_indicators">j</span>
+            <div class="arrow-down"></div>'''
+                
+def get_template_values_and_extras_for_two_sum(example, custom_example_input, obj, method):
+    title, code, example_values, examples, methods, anchor = obj.get_template_values(
+        example=example,
+        custom_example_input=custom_example_input,
+        method=method
+    )
+
+    # Pull steps from the example_values
+    steps = example_values["steps"]
+    # Get the length of the steps for enumerating through values
+    length = len(steps)
+
+    return example_values, steps, length
+
 def test_add_two_numbers(client):
 
     '''
@@ -205,12 +345,16 @@ def check_special_content_for_add_two_numbers(step, example_values, data):
 
     for ind1 in range(input_l1_length):
         if step["L1"]:
-            check_boxes(ind1, step["L1"].id, data, example_values, "L1")
+            check_boxes_for_add_two_numbers(ind1, step["L1"].id, data, example_values, "L1")
     for ind2 in range(input_l2_length):
         if step["L2"]:
-            check_boxes(ind2, step["L2"].id, data, example_values, "L2")
+            check_boxes_for_add_two_numbers(ind2, step["L2"].id, data, example_values, "L2")
+    for val in step["values_arr"]:
+        assert bytes(f'''<div class="box">
+                <span class="box-value">{val}</span>
+            </div>''', encoding=ENCODING) in data
 
-def check_boxes(ind, id_value, data, example_values, L_lookup):
+def check_boxes_for_add_two_numbers(ind, id_value, data, example_values, L_lookup):
     if ind == id_value:
         assert bytes(f'''<div class="box-blue">
                 <span class="box-value">{example_values["input"][L_lookup][ind]}</span>

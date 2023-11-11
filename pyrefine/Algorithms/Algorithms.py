@@ -7,8 +7,9 @@ bp = Blueprint("algorithms", __name__, url_prefix="/algorithms")
 
 @bp.route("two-sum/method/<string:method>/example/<int:example>/step/<int:id>")
 @bp.route("two-sum/method/<string:method>/example/custom/step/<int:id>", methods=["GET", "POST"])
-@bp.route("two-sum/method/<string:method>/example/custom/step/<int:id>/<string:custom_example_input>/<string:target>", methods=["GET", "POST"])
-def twoSum(id=1, example=None, custom_example_input=None, target=None, method=None):
+@bp.route("two-sum/method/<string:method>/example/custom/step/<int:id>/<string:custom_example_input>", methods=["GET", "POST"])
+def twoSum(id=1, example=None, custom_example_input=None, method=None):
+    print(custom_example_input)
     twoSum = TwoSumImplementer()
     title = None
     code = None
@@ -19,28 +20,31 @@ def twoSum(id=1, example=None, custom_example_input=None, target=None, method=No
     if request.method == 'POST':
         # Post implies a custom example
         id = 1
-        custom_example_input = request.form['input']
-        target = request.form['target']
+        custom_example_input = {
+            "input": request.form['input'],
+            "target": request.form['target']
+        }
         # Form data is brought in as a string, so we need to format it for int and list values
-        custom_example_input, target = format_custom_example_input_and_target(custom_example_input, target)
+        custom_example_input = format_custom_example_input_and_target(custom_example_input)
     else:
         if example is not None:
             # If example is not None and either id or example are less than 1 then the url does not exist
             if example < 1 or id < 1:
                 abort(404)
-        elif custom_example_input is not None and target is not None:
+        elif custom_example_input is not None:
             # custom example data can still be brought in through url parameters. These also need to be formatted
-            custom_example_input, target = format_custom_example_input_and_target(custom_example_input, target)
+            custom_example_input = json.loads(custom_example_input.replace("'", '"'))
         else:
             # Default example in case of moving to the custom tab, but not submitted yet
-            custom_example_input = [5, 8, 3, 6, 7]
-            target = 9
+            custom_example_input = {
+                "input": [5, 8, 3, 6, 7],
+                "target": 9
+            }
 
     # Generate the example and steps
     title, code, example_values, examples, methods, anchor = twoSum.get_template_values(
         example=example_in,
         custom_example_input=custom_example_input,
-        target=target,
         method=method
     )
 
@@ -69,7 +73,6 @@ def twoSum(id=1, example=None, custom_example_input=None, target=None, method=No
         examples_length=examples_length,
         input_length=input_length,
         custom_example_input=custom_example_input,
-        target=target,
         methods=methods,
         anchor=anchor,
         method=method
@@ -159,11 +162,12 @@ def format_custom_example_input(custom_example_input):
     custom_example_input = [int(i) for i in custom_example_input]
     return custom_example_input
 
-def format_custom_example_input_and_target(custom_example_input, target):
+def format_custom_example_input_and_target(custom_example_input):
+    print(custom_example_input)
     # Format the custom example input and target for the algorithm
-    custom_example_input = format_custom_example_input(custom_example_input)
-    target = int(target)
-    return custom_example_input, target
+    custom_example_input["input"] = format_custom_example_input(custom_example_input["input"])
+    custom_example_input["target"] = int(custom_example_input["target"])
+    return custom_example_input
 
 def format_custom_example_input_and_target_add_two_numbers(custom_example_input):
     # Format the custom example input and target for the algorithm
