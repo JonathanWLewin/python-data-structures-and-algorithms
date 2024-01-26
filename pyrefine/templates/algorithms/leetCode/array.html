@@ -2,10 +2,12 @@
 
 {% block input_fields %}
     {% if example %}
-    <h2>Example {{example}}</h2>
-    <span>Input: {{example_values.input}}</span>
-    <span>Target: {{example_values.target}}</span>
-    <span>Expected output: {{example_values.output}}</span>
+    <h3>Input</h3>
+    <span class="pre-wrap">{{example_values.input}}</span>
+    <h3>Target</h3>
+    <span class="pre-wrap">{{example_values.target}}</span>
+    <h3>Expected output</h3>
+    <span class="pre-wrap">{{example_values.output}}</span>
     {% else %}
     <!-- On custom example display form values for overwrite and saving -->
     <form method="post" class="col-values">

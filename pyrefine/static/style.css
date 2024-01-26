@@ -65,6 +65,27 @@ a {
     word-wrap: break-word;
 }
 
+.walkthrough-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.left-side-bar {
+    background-color: grey;
+    border-radius: 3px;
+    width: 15%;
+    left: 0;
+    color: #000;
+}
+
+.right-side-bar {
+    background-color: grey;
+    border-radius: 3px;
+    width: 15%;
+    color: #000;
+}
+
 .output-box {
     background-color: grey;
     border-radius: 3px;
@@ -240,5 +261,5 @@ a {
 
 .hidden_i_j_indicators {
     font-size: larger;
-    color: #000000;
+    color: #252525;
 }

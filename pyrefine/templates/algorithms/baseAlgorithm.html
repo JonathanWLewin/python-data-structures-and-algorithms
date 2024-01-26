@@ -1,28 +1,35 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <body onload="scrollToElement()">
-        <div class="code-box">
-            <span>{{code | safe}}</span>
+    <h2>Example {{example}}</h2>
+    <!-- List out examples as buttons to redirect -->
+    <div class="walkthrough-section">
+        <div class="left-side-bar">
+            <!-- Display information for selected example -->
+            <div class="output-box">
+                <h2>Input Values</h2>
+                {% block input_fields %}{% endblock %}
+            </div>
+            {% if step["values_to_display"] %}
+            {% for key in step["values_to_display"] %}
+            <span>{{key}}</span>
+            {{step["values_to_display"][key]}}
+            {% endfor %}
+            {% endif %}
         </div>
-    </body>
-    
-    <script>
-        function scrollToElement() {
-            var element = document.getElementById('{{anchor}}');
-            element.scrollIntoView();
-        }
-    </script>
-
-{% endblock %}
-
-{% block stickyFooter %}
-    <!-- Footer -->
-    <div class="col-values">
-        <!-- Display information for selected example -->
-        {% block input_fields %}{% endblock %}
-        <!-- List out examples as buttons to redirect -->
-        <div class="row-values">
+        <!-- For an array type display array values -->
+        <div class="col-values">
+            {% block special_content %}{% endblock %}
+        </div>
+        <div class="right-side-bar">
+            <!-- For each method add a button to switch to that method -->
+            <h2>Methods</h2>
+            {% for method_value in methods %}
+            <form action="{{url_for(request.url_rule.endpoint, id=1, example=example, custom_example_input=custom_example_input, method=method_value)}}" method="GET">
+                <input type="submit" value="{{method_value}}">
+            </form>
+            {% endfor %}
+            <h2>Examples</h2>
             {% for example_id in range(examples_length) %}
                 <form action="{{url_for(request.url_rule.endpoint, id=1, example=example_id + 1, method=method)}}" method="GET">
                     <input type="submit" value="Example {{example_id + 1}}">
@@ -32,50 +39,35 @@
             <form action="{{url_for(request.url_rule.endpoint, id=1, method=method)}}" method="GET">
                 <input type="submit" value="Custom">
             </form>
+            <br><br>
+            <!-- Nav buttons for moving through steps -->
+            <div id="nav-buttons" class="nav-buttons">
+                {% if id > 1 %}
+                <form action="{{url_for(request.url_rule.endpoint, id=id -1, example=example, custom_example_input=custom_example_input, method=method)}}" method="GET">
+                    <input type="submit" value="Previous">
+                </form>
+                {% else %}
+                <form action="{{url_for(request.url_rule.endpoint, id=id -1, example=example, custom_example_input=custom_example_input, method=method)}}" method="GET">
+                    <input type="submit" value="Previous" class="disabled">
+                </form>
+                {% endif %} 
+                {% if id < length %}
+                <form action="{{url_for(request.url_rule.endpoint, id=id + 1, example=example, custom_example_input=custom_example_input, method=method)}}" method="GET">
+                    <input type="submit" value="Next">
+                </form>
+                {% else %}
+                <form action="{{url_for(request.url_rule.endpoint, id=id + 1, example=example, custom_example_input=custom_example_input, method=method)}}" method="GET">
+                    <input type="submit" value="Next" class="disabled">
+                </form>
+                {% endif %} 
+            </div>
         </div>
     </div>
-    <!-- If there are values to display to the user enumerate through and display -->
-    <div class="col-values">
-        <!-- Nav buttons for moving through steps -->
-        <div id="nav-buttons" class="nav-buttons">
-            {% if id > 1 %}
-            <form action="{{url_for(request.url_rule.endpoint, id=id -1, example=example, custom_example_input=custom_example_input, method=method)}}" method="GET">
-                <input type="submit" value="Previous">
-            </form>
-            {% else %}
-            <form action="{{url_for(request.url_rule.endpoint, id=id -1, example=example, custom_example_input=custom_example_input, method=method)}}" method="GET">
-                <input type="submit" value="Previous" class="disabled">
-            </form>
-            {% endif %} 
-            {% if id < length %}
-            <form action="{{url_for(request.url_rule.endpoint, id=id + 1, example=example, custom_example_input=custom_example_input, method=method)}}" method="GET">
-                <input type="submit" value="Next">
-            </form>
-            {% else %}
-            <form action="{{url_for(request.url_rule.endpoint, id=id + 1, example=example, custom_example_input=custom_example_input, method=method)}}" method="GET">
-                <input type="submit" value="Next" class="disabled">
-            </form>
-            {% endif %} 
+    <br><br>
+    <body>
+        <div class="code-box">
+            <span>{{code | safe}}</span>
         </div>
-    {% if step["values_to_display"] %}
-    {% for key in step["values_to_display"] %}
-        <span>{{key}}</span>
-        {{step["values_to_display"][key]}}
-    {% endfor %}
-    {% endif %}
-    </div>
-    <!-- For an array type display array values -->
-    <div class="col-values">
-        {% block special_content %}{% endblock %}
-    </div>
+    </body>
 
-    <div class="col-values-flex-start">
-        <!-- For each method add a button to switch to that method -->
-        <h2>Methods</h2>
-        {% for method_value in methods %}
-        <form action="{{url_for(request.url_rule.endpoint, id=1, example=example, custom_example_input=custom_example_input, method=method_value)}}" method="GET">
-            <input type="submit" value="{{method_value}}">
-        </form>
-        {% endfor %}
-    </div>
 {% endblock %}
